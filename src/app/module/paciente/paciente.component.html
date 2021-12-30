@@ -30,7 +30,8 @@
     <ng-container matColumnDef="accion">
       <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let u; let i = index">
-        <button mat-icon-button (click)="info(i)">
+        <button mat-icon-button matTooltip="Información del paciente"
+        matTooltipPosition="above" (click)="info(i)">
           <span
             class="iconify"
             data-icon="bi:info-circle"
@@ -38,7 +39,8 @@
             data-height="24"
           ></span>
         </button>
-        <button mat-icon-button (click)="familia(i)">
+        <button mat-icon-button matTooltip="Ver Familiares"
+        matTooltipPosition="above" (click)="familia(i)">
           <span
             class="iconify"
             data-icon="carbon:pedestrian-family"

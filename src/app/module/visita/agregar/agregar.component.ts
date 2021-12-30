@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { collection, Firestore, getDocs } from '@angular/fire/firestore';
+import { addDoc, collection, Firestore, getDocs } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -76,8 +76,14 @@ export class AgregarComponent {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  agregar() {
-
+  async agregar() {
+    let visita = {
+      dni: this.visitaForm.value.dni,
+      enfermedad: this.visitaForm.value.enfermedad,
+      fecha: this.visitaForm.value.fecha.toLocaleString(),
+    }
+    await addDoc(collection(this.afs, 'visita'), visita)
+    this.route.navigate(['/visita']);
   }
 
 }

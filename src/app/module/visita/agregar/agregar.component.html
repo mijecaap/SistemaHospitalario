@@ -1,8 +1,8 @@
 <div class="p-4">
-  <button mat-stroked-button color="primary" routerLink="/enfermedad">
+  <button mat-stroked-button color="primary" routerLink="/visita">
     Volver
   </button>
-  <div class="col-12 mt-4" style="color: #55acee">
+  <div class="col-12 mt-4 text-center" style="color: #55acee">
     <h1>Agendar visita</h1>
   </div>
   <form
@@ -43,7 +43,7 @@
         formControlName="enfermedad"
         class="form-control form-control-lg"
       >
-        <option value="0">Selecciona el tipo de enfermedad</option>
+        <option value="">Selecciona el tipo de enfermedad</option>
         <option *ngFor="let u of listEnfermedad" [value]="u.nombre">
           {{ u.nombre }}
         </option>
@@ -76,11 +76,11 @@
       <span
         class="text-danger ms-2"
         *ngIf="
-          visitaForm.get('enfermedad')?.hasError('required') &&
-          visitaForm.get('enfermedad')?.touched
+          visitaForm.get('fecha')?.hasError('required') &&
+          visitaForm.get('fecha')?.touched
         "
       >
-        La enfermedad <strong>es requerido</strong>
+        La fecha <strong>es requerida</strong>
       </span>
     </div>
     <button

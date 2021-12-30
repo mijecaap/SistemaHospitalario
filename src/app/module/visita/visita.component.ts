@@ -17,6 +17,7 @@ export class VisitaComponent implements OnInit {
   constructor(
     private afs: Firestore
   ) {
+    this.leerAsegurados();
     this.dataSourceVisita = new MatTableDataSource(this.listVisita)
   }
 
