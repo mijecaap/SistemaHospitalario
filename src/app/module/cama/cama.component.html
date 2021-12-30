@@ -1,0 +1,69 @@
+<div class="p-4">
+  <div class="col-12" style="color: #55acee">
+    <h1>ESTADO DE CAMAS</h1>
+  </div>
+  <div class="row mb-4">
+    <div class="col-12">
+      <h1>Primer piso</h1>
+    </div>
+    <div class="col-4" *ngFor="let u of listPiso1">
+      <mat-card>
+        <div
+          class="col-4 offset-4 text-center"
+          [ngStyle]="{
+            'background-color': backgroundColor(u.estado),
+            color: textColor(u.estado)
+          }"
+        >
+          {{ u.numero }}
+        </div>
+        <span
+          *ngIf="!u.estado"
+          class="iconify col-4 offset-4"
+          data-icon="twemoji:bed"
+          data-width="60"
+          data-height="60"
+        ></span>
+        <span
+          *ngIf="u.estado"
+          class="iconify col-4 offset-4"
+          data-icon="twemoji:person-in-bed"
+          data-width="60"
+          data-height="60"
+        ></span>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h1>Segundo piso</h1>
+    </div>
+    <div class="col-4" *ngFor="let u of listPiso2">
+      <mat-card>
+        <div
+          class="col-4 offset-4 text-center"
+          [ngStyle]="{
+            'background-color': backgroundColor(u.estado),
+            color: textColor(u.estado)
+          }"
+        >
+          {{ u.numero }}
+        </div>
+        <span
+          *ngIf="!u.estado"
+          class="iconify col-4 offset-4"
+          data-icon="twemoji:bed"
+          data-width="60"
+          data-height="60"
+        ></span>
+        <span
+          *ngIf="u.estado"
+          class="iconify col-4 offset-4"
+          data-icon="twemoji:person-in-bed"
+          data-width="60"
+          data-height="60"
+        ></span>
+      </mat-card>
+    </div>
+  </div>
+</div>

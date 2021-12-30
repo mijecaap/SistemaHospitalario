@@ -1,0 +1,140 @@
+<div class="p-4">
+  <button mat-stroked-button color="primary" routerLink="/paciente">
+    Volver
+  </button>
+  <div class="col-12 mt-4" style="color: #55acee">
+    <h1>Agregar Paciente - Familia</h1>
+  </div>
+  <div class="row">
+    <form
+      class="col-6"
+      [formGroup]="pacienteForm"
+      (ngSubmit)="agregar()"
+      autocomplete="off"
+    >
+      <div class="mb-3">
+        <input
+          type="text"
+          formControlName="nombre"
+          class="form-control form-control-lg"
+          placeholder="Nombre"
+        />
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            pacienteForm.get('nombre')?.hasError('required') &&
+            pacienteForm.get('nombre')?.touched
+          "
+        >
+          El nombre <strong>es requerido</strong>
+        </span>
+      </div>
+      <div class="mb-3">
+        <input
+          type="text"
+          formControlName="apellido"
+          class="form-control form-control-lg"
+          placeholder="Apellido"
+        />
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            pacienteForm.get('apellido')?.hasError('required') &&
+            pacienteForm.get('apellido')?.touched
+          "
+        >
+          El apellido <strong>es requerido</strong>
+        </span>
+      </div>
+      <div class="mb-3">
+        <input
+          type="text"
+          formControlName="dni"
+          class="form-control form-control-lg"
+          placeholder="DNI"
+        />
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            pacienteForm.get('dni')?.hasError('required') &&
+            pacienteForm.get('dni')?.touched
+          "
+        >
+          El dni <strong>es requerido</strong>
+        </span>
+      </div>
+      <div *ngIf="listTable.length == 0" class="mb-3">
+        <input
+          type="text"
+          formControlName="direccion"
+          class="form-control form-control-lg"
+          placeholder="Dirección"
+        />
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            pacienteForm.get('direccion')?.hasError('required') &&
+            pacienteForm.get('direccion')?.touched
+          "
+        >
+          El dirección <strong>es requerido</strong>
+        </span>
+      </div>
+      <div class="mb-3">
+        <select
+          type="text"
+          formControlName="rol"
+          class="form-control form-control-lg"
+        >
+          <option value="">Selecciona un rol</option>
+          <option value="Padre">Padre</option>
+          <option value="Madre">Madre</option>
+          <option value="Hijo">Hijo</option>
+        </select>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            pacienteForm.get('rol')?.hasError('required') &&
+            pacienteForm.get('rol')?.touched
+          "
+        >
+          El rol <strong>es requerido</strong>
+        </span>
+      </div>
+      <button
+        type="submit"
+        [disabled]="pacienteForm.invalid"
+        class="btn btn-primary btn-lg w-100"
+        style="background-color: #114789 !important"
+      >
+        Agregar
+      </button>
+    </form>
+    <table mat-table class="table-hover col-6" [dataSource]="dataSourceAgregar">
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let u">{{ u.nombre }}</td>
+      </ng-container>
+      <ng-container matColumnDef="dni">
+        <th mat-header-cell *matHeaderCellDef>DNI</th>
+        <td mat-cell *matCellDef="let u">{{ u.dni }}</td>
+      </ng-container>
+      <ng-container matColumnDef="rol">
+        <th mat-header-cell *matHeaderCellDef>Rol</th>
+        <td mat-cell *matCellDef="let u">{{ u.rol }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsAgregar"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsAgregar"></tr>
+    </table>
+    <button
+      [disabled]="listTable.length == 0"
+      type="button"
+      class="btn btn-primary btn-lg w-100 mt-3"
+      style="background-color: #114789 !important"
+      (click)="enviarPacientes()"
+    >
+      Ingresar Asegurados
+    </button>
+  </div>
+</div>

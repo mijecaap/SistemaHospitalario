@@ -1,0 +1,25 @@
+td button {
+  background-color: white !important;
+}
+
+.mat-column-id {
+  width: 8%;
+}
+.mat-column-nombre {
+  width: 23%;
+}
+.mat-column-apellido {
+  width: 23%;
+}
+.mat-column-dni {
+  width: 23%;
+}
+.mat-column-accion {
+  width: 23%;
+}
+.mat-header-cell {
+  text-align: center;
+}
+.mat-cell {
+  text-align: center;
+}

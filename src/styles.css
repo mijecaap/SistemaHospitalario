@@ -1,0 +1,14 @@
+
+.info-container-dialog .mat-dialog-container {
+  padding: 0;
+}
+
+.info-container-dialog .mat-header-cell,
+.mat-cell {
+  justify-content: center;
+}
+
+.loading-container-dialog .mat-dialog-container {
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: none;
+}

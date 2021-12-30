@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "sistemahospitalario-17888": {
+      "hosting": {
+        "MediPlus": [
+          "sistemahospitalario-17888"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "sistemahospitalario-17888"
+  }
+}

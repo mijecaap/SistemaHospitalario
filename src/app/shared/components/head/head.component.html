@@ -1,0 +1,136 @@
+<mat-sidenav-container
+  class="toolbar-sidenav-container"
+  style="min-height: 100%"
+>
+  <mat-sidenav mode="side" opened [disableClose]="true" style="width: 6%">
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="height: 8%"
+    >
+      <span
+        class="iconify"
+        data-icon="icon-park-outline:plus-cross"
+        style="color: #114789; font-size: 30px"
+      ></span>
+    </div>
+
+    <div style="background-color: #8996ac; min-height: 92%">
+      <mat-nav-list [disableRipple]="true">
+        <a
+          mat-list-item
+          matTooltip="Agendar cita"
+          matTooltipPosition="right"
+          (click)="onItemSelected('visita')"
+          class="mt-4"
+        >
+          <span
+            class="iconify"
+            data-icon="ant-design:calendar-twotone"
+            data-width="50"
+            data-height="50"
+          ></span>
+        </a>
+        <a
+          mat-list-item
+          matTooltip="Gestionar camas"
+          matTooltipPosition="right"
+          (click)="onItemSelected('cama')"
+          class="mt-4"
+        >
+          <span
+            class="iconify"
+            data-icon="healthicons:inpatient"
+            data-width="50"
+            data-height="50"
+          ></span>
+        </a>
+        <a
+          mat-list-item
+          matTooltip="Enfermedades"
+          matTooltipPosition="right"
+          (click)="onItemSelected('enfermedad')"
+          class="mt-4"
+        >
+          <span
+            class="iconify"
+            data-icon="bx:bxs-virus"
+            data-width="50"
+            data-height="50"
+          ></span>
+        </a>
+        <a
+          mat-list-item
+          matTooltip="Pacientes asegurados"
+          matTooltipPosition="right"
+          class="mt-4"
+          (click)="onItemSelected('paciente')"
+        >
+          <span
+            class="iconify"
+            data-icon="fluent:patient-32-filled"
+            data-width="50"
+            data-height="50"
+          ></span>
+        </a>
+        <a
+          mat-list-item
+          matTooltip="Emergencias"
+          matTooltipPosition="right"
+          (click)="onItemSelected('internar')"
+          class="mt-4"
+        >
+          <span
+            class="iconify"
+            data-icon="healthicons:accident-and-emergency-outline"
+            data-width="50"
+            data-height="50"
+          ></span>
+        </a>
+        <a
+          mat-list-item
+          matTooltip="Doctores"
+          matTooltipPosition="right"
+          class="mt-4"
+          (click)="onItemSelected('doctor')"
+        >
+          <span
+            class="iconify"
+            data-icon="healthicons:doctor-male"
+            data-width="50"
+            data-height="50"
+          ></span>
+        </a>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content style="width: 94%">
+    <mat-toolbar style="height: 8vh; background-color: #bbdefb; color: #000">
+      <span style="font-size: 24px">MEDIPLUS</span>
+      <span class="example-spacer"></span>
+      <button
+        mat-raised-button
+        class="d-flex justify-content-center"
+        style="padding: 2px 5px"
+        (click)="logOut()"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+          style="
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            border-radius: 50%;
+            object-fit: cover;
+          "
+          class="me-1"
+        />
+        <span class="me-3" style="color: #005fad; font-size: 12px">Miguel</span>
+        <mat-icon style="color: #838383">logout</mat-icon>
+      </button>
+    </mat-toolbar>
+    <div style="height: 92vh">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

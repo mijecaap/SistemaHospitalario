@@ -1,0 +1,68 @@
+<div class="w-100 row" style="height: 100vh; margin: 0 !important">
+  <div
+    class="col-3 d-flex justify-content-center align-items-center"
+    style="background-color: #64b5f6"
+  >
+    <div class="w-100 row">
+      <b class="h2 text-center" style="color: #fff">MEDIPLUS</b>
+      <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+        <div class="mb-3">
+          <input
+            type="text"
+            formControlName="usuario"
+            class="form-control form-control-lg"
+            placeholder="Correo"
+          />
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              loginForm.get('usuario')?.hasError('required') &&
+              loginForm.get('usuario')?.touched
+            "
+          >
+            El correo <strong>es requerido</strong>
+          </span>
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              loginForm.get('usuario')?.hasError('email') &&
+              loginForm.get('usuario')?.touched
+            "
+          >
+            Correo <strong>inválido</strong>
+          </span>
+        </div>
+        <div class="mb-3">
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control form-control-lg"
+            placeholder="Contraseña"
+          />
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              loginForm.get('password')?.hasError('required') &&
+              loginForm.get('password')?.touched
+            "
+          >
+            El password <strong>es requerido</strong>
+          </span>
+        </div>
+        <button
+          type="submit"
+          [disabled]="loginForm.invalid"
+          class="btn btn-primary btn-lg w-100"
+          style="background-color: #114789 !important"
+        >
+          INGRESAR
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-9 container-img"></div>
+</div>
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>
