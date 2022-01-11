@@ -1,140 +1,278 @@
 <div class="p-4">
-  <button mat-stroked-button color="primary" routerLink="/paciente">
-    Volver
-  </button>
-  <div class="col-12 mt-4" style="color: #55acee">
-    <h1>Agregar Paciente - Familia</h1>
-  </div>
-  <div class="row">
-    <form
-      class="col-6"
-      [formGroup]="pacienteForm"
-      (ngSubmit)="agregar()"
-      autocomplete="off"
+  <div class="d-flex align-items-center">
+    <button mat-stroked-button routerLink="/paciente">
+      <mat-icon>reply</mat-icon>
+    </button>
+    <span class="h4 ms-4 mb-0" style="color: #55acee"
+      >Agregar Asegurado - Familia</span
     >
-      <div class="mb-3">
-        <input
-          type="text"
-          formControlName="nombre"
-          class="form-control form-control-lg"
-          placeholder="Nombre"
-        />
-        <span
-          class="text-danger ms-2"
-          *ngIf="
-            pacienteForm.get('nombre')?.hasError('required') &&
-            pacienteForm.get('nombre')?.touched
-          "
+  </div>
+  <div class="row mt-4">
+    <div class="col-6 p-4 card">
+      <form
+        [formGroup]="pacienteForm"
+        (ngSubmit)="agregar()"
+        autocomplete="off"
+      >
+        <div class="mb-3">
+          <input
+            type="text"
+            formControlName="nombre"
+            class="form-control form-control-lg"
+            placeholder="Nombre"
+          />
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              pacienteForm.get('nombre')?.hasError('required') &&
+              pacienteForm.get('nombre')?.touched
+            "
+          >
+            El nombre <strong>es requerido</strong>
+          </span>
+        </div>
+        <div class="mb-3">
+          <input
+            type="text"
+            formControlName="apellido"
+            class="form-control form-control-lg"
+            placeholder="Apellido"
+          />
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              pacienteForm.get('apellido')?.hasError('required') &&
+              pacienteForm.get('apellido')?.touched
+            "
+          >
+            El apellido <strong>es requerido</strong>
+          </span>
+        </div>
+        <div class="row mb-3">
+          <div class="col-6">
+            <input
+              type="text"
+              formControlName="edad"
+              class="form-control form-control-lg"
+              maxlength="3"
+              placeholder="Edad"
+            />
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                pacienteForm.get('edad')?.hasError('required') &&
+                pacienteForm.get('edad')?.touched
+              "
+            >
+              La edad <strong>es requerida</strong>
+            </span>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                pacienteForm.get('edad')?.hasError('pattern') &&
+                pacienteForm.get('edad')?.touched
+              "
+            >
+              El edad <strong>solo permite números</strong>
+            </span>
+          </div>
+          <div class="col-6">
+            <select
+              type="text"
+              formControlName="genero"
+              class="form-control form-control-lg"
+            >
+              <option value="">Selecciona un género</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+              <option value="Otro">Otro</option>
+            </select>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                pacienteForm.get('genero')?.hasError('required') &&
+                pacienteForm.get('genero')?.touched
+              "
+            >
+              El género <strong>es requerido</strong>
+            </span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-6">
+            <input
+              type="text"
+              formControlName="dni"
+              class="form-control form-control-lg"
+              maxlength="8"
+              placeholder="DNI"
+            />
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                pacienteForm.get('dni')?.hasError('required') &&
+                pacienteForm.get('dni')?.touched
+              "
+            >
+              El dni <strong>es requerido</strong>
+            </span>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                (pacienteForm.get('dni')?.hasError('minlength') ||
+                  pacienteForm.get('dni')?.hasError('maxlength')) &&
+                pacienteForm.get('dni')?.touched
+              "
+            >
+              El dni <strong>es de 8 digitos</strong>
+            </span>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                !(
+                  pacienteForm.get('dni')?.hasError('minlength') ||
+                  pacienteForm.get('dni')?.hasError('maxlength')
+                ) &&
+                pacienteForm.get('dni')?.hasError('pattern') &&
+                pacienteForm.get('dni')?.touched
+              "
+            >
+              El dni <strong>solo permite números</strong>
+            </span>
+          </div>
+          <div class="col-6">
+            <input
+              type="text"
+              formControlName="celular"
+              class="form-control form-control-lg"
+              maxlength="9"
+              placeholder="Celular"
+            />
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                pacienteForm.get('celular')?.hasError('required') &&
+                pacienteForm.get('celular')?.touched
+              "
+            >
+              El celular <strong>es requerido</strong>
+            </span>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                (pacienteForm.get('celular')?.hasError('minlength') ||
+                  pacienteForm.get('celular')?.hasError('maxlength')) &&
+                pacienteForm.get('celular')?.touched
+              "
+            >
+              El celular <strong>es de 9 digitos</strong>
+            </span>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                !(
+                  pacienteForm.get('celular')?.hasError('minlength') ||
+                  pacienteForm.get('celular')?.hasError('maxlength')
+                ) &&
+                pacienteForm.get('celular')?.hasError('pattern') &&
+                pacienteForm.get('celular')?.touched
+              "
+            >
+              El celular <strong>solo permite números</strong>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="listTable.length == 0" class="mb-3">
+          <input
+            type="text"
+            formControlName="direccion"
+            class="form-control form-control-lg"
+            placeholder="Dirección"
+          />
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              pacienteForm.get('direccion')?.hasError('required') &&
+              pacienteForm.get('direccion')?.touched
+            "
+          >
+            El dirección <strong>es requerido</strong>
+          </span>
+        </div>
+        <div *ngIf="listTable.length > 0" class="mb-3">
+          <select
+            type="text"
+            formControlName="rol"
+            class="form-control form-control-lg"
+          >
+            <option value="">Selecciona un rol</option>
+            <option *ngIf="disablePareja" value="Pareja">Pareja</option>
+            <option value="Hijo">Hijo</option>
+          </select>
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              pacienteForm.get('rol')?.hasError('required') &&
+              pacienteForm.get('rol')?.touched
+            "
+          >
+            El rol <strong>es requerido</strong>
+          </span>
+        </div>
+        <button
+          type="submit"
+          [disabled]="pacienteForm.invalid"
+          class="btn btn-primary btn-lg w-100"
+          style="background-color: #114789 !important"
         >
-          El nombre <strong>es requerido</strong>
-        </span>
-      </div>
-      <div class="mb-3">
-        <input
-          type="text"
-          formControlName="apellido"
-          class="form-control form-control-lg"
-          placeholder="Apellido"
-        />
-        <span
-          class="text-danger ms-2"
-          *ngIf="
-            pacienteForm.get('apellido')?.hasError('required') &&
-            pacienteForm.get('apellido')?.touched
-          "
-        >
-          El apellido <strong>es requerido</strong>
-        </span>
-      </div>
-      <div class="mb-3">
-        <input
-          type="text"
-          formControlName="dni"
-          class="form-control form-control-lg"
-          placeholder="DNI"
-        />
-        <span
-          class="text-danger ms-2"
-          *ngIf="
-            pacienteForm.get('dni')?.hasError('required') &&
-            pacienteForm.get('dni')?.touched
-          "
-        >
-          El dni <strong>es requerido</strong>
-        </span>
-      </div>
-      <div *ngIf="listTable.length == 0" class="mb-3">
-        <input
-          type="text"
-          formControlName="direccion"
-          class="form-control form-control-lg"
-          placeholder="Dirección"
-        />
-        <span
-          class="text-danger ms-2"
-          *ngIf="
-            pacienteForm.get('direccion')?.hasError('required') &&
-            pacienteForm.get('direccion')?.touched
-          "
-        >
-          El dirección <strong>es requerido</strong>
-        </span>
-      </div>
-      <div class="mb-3">
-        <select
-          type="text"
-          formControlName="rol"
-          class="form-control form-control-lg"
-        >
-          <option value="">Selecciona un rol</option>
-          <option value="Padre">Padre</option>
-          <option value="Madre">Madre</option>
-          <option value="Hijo">Hijo</option>
-        </select>
-        <span
-          class="text-danger ms-2"
-          *ngIf="
-            pacienteForm.get('rol')?.hasError('required') &&
-            pacienteForm.get('rol')?.touched
-          "
-        >
-          El rol <strong>es requerido</strong>
-        </span>
-      </div>
+          Agregar
+        </button>
+      </form>
+    </div>
+    <div class="col-6 ps-4 pe-4">
+      <div class="form-text">Total a registrar: {{ listTable.length }}</div>
+      <table
+        mat-table
+        class="table-hover w-100 mat-elevation-z4"
+        [dataSource]="dataSourceAgregar"
+      >
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let u">{{ u.nombre }}</td>
+        </ng-container>
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef>Apellido</th>
+          <td mat-cell *matCellDef="let u">{{ u.apellido }}</td>
+        </ng-container>
+        <ng-container matColumnDef="dni">
+          <th mat-header-cell *matHeaderCellDef>DNI</th>
+          <td mat-cell *matCellDef="let u">{{ u.dni }}</td>
+        </ng-container>
+        <ng-container matColumnDef="rol">
+          <th mat-header-cell *matHeaderCellDef>Rol</th>
+          <td mat-cell *matCellDef="let u">{{ u.rol }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsAgregar"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsAgregar"></tr>
+      </table>
+      <mat-paginator
+        class="mat-elevation-z4"
+        #pagAsegurado
+        [pageSizeOptions]="[4]"
+      >
+      </mat-paginator>
+    </div>
+    <div class="mt-3 ps-4 pe-4">
       <button
-        type="submit"
-        [disabled]="pacienteForm.invalid"
+        [disabled]="listTable.length == 0"
+        type="button"
         class="btn btn-primary btn-lg w-100"
         style="background-color: #114789 !important"
+        (click)="enviarPacientes()"
       >
-        Agregar
+        Registrar
       </button>
-    </form>
-    <table mat-table class="table-hover col-6" [dataSource]="dataSourceAgregar">
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let u">{{ u.nombre }}</td>
-      </ng-container>
-      <ng-container matColumnDef="dni">
-        <th mat-header-cell *matHeaderCellDef>DNI</th>
-        <td mat-cell *matCellDef="let u">{{ u.dni }}</td>
-      </ng-container>
-      <ng-container matColumnDef="rol">
-        <th mat-header-cell *matHeaderCellDef>Rol</th>
-        <td mat-cell *matCellDef="let u">{{ u.rol }}</td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumnsAgregar"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumnsAgregar"></tr>
-    </table>
-    <button
-      [disabled]="listTable.length == 0"
-      type="button"
-      class="btn btn-primary btn-lg w-100 mt-3"
-      style="background-color: #114789 !important"
-      (click)="enviarPacientes()"
-    >
-      Ingresar Asegurados
-    </button>
+    </div>
   </div>
 </div>

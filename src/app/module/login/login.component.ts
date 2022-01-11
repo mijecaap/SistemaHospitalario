@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     signInWithEmailAndPassword(this.afAuth, usuario, password).then((rspt) => {
       this.setLocalStorage(rspt.user);
-      this.router.navigate(['/inicio'])
+      this.router.navigate(['/visita'])
       this.loading = false;
     }, error => {
       this.loading = false;

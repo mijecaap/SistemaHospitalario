@@ -1,4 +1,3 @@
-
 .info-container-dialog .mat-dialog-container {
   padding: 0;
 }
@@ -11,4 +10,63 @@
 .loading-container-dialog .mat-dialog-container {
   background-color: rgba(0, 0, 0, 0);
   box-shadow: none;
+}
+
+.mat-toolbar {
+  background: #000046; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #1cb5e0,
+    #000046
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #1cb5e0,
+    #000046
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.mat-drawer-container {
+  background-color: #f3f3f3;
+}
+
+/* CSS TABLE */
+
+.mat-header-row {
+  background: #000046; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #1cb5e0,
+    #000046
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #1cb5e0,
+    #000046
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.mat-header-cell {
+  color: #fff;
+}
+
+.mat-row:hover {
+  background-color: rgba(0, 95, 173, 0.1);
+  color: #676767;
+}
+
+.mat-paginator-page-size {
+  display: none !important;
+}
+
+.filter-table .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+/* CSS FILTER */
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #0e5b93 !important;
+}
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #0e5b93 !important;
 }

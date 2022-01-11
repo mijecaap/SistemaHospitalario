@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { collection, Firestore, getDocs } from '@angular/fire/firestore';
+import { collection, Firestore, getDocs, orderBy, query } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { DarAltaComponent } from './dar-alta/dar-alta.component';
 
 export interface Cama {
+  id: string;
   numero: number;
   piso: number;
-  estado: boolean;
+  idInternado: string;
 }
 
 @Component({
@@ -19,7 +22,8 @@ export class CamaComponent implements OnInit {
   listPiso2: Cama[] = [];
 
   constructor(
-    private afs: Firestore
+    private afs: Firestore,
+    private matDialog: MatDialog
   ) {
     this.leerAsegurados();
   }
@@ -28,10 +32,19 @@ export class CamaComponent implements OnInit {
   }
 
   async leerAsegurados() {
-    const querySnapshot = await getDocs(collection(this.afs, 'camas'));
+    this.listCama = []
+    this.listPiso1 = []
+    this.listPiso2 = []
+    const q = query(collection(this.afs, 'camas'), orderBy('numero', 'asc'))
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      console.log(doc.data());
-      this.listCama.push(doc.data() as Cama);
+      let cama: Cama = {
+        id: doc.id,
+        piso: doc.data().piso,
+        numero: doc.data().numero,
+        idInternado: doc.data().idInternado
+      }
+      this.listCama.push(cama);
     });
     this.listCama.forEach((c) => {
       if (c.piso == 1) {
@@ -42,19 +55,36 @@ export class CamaComponent implements OnInit {
     })
   }
 
-  backgroundColor(state: boolean): string {
-    if (state) {
+  backgroundColor(state: string): string {
+    if (state != "") {
       return '#F44336'
     } else {
       return '#BBDEFB'
     }
   }
 
-  textColor(state: boolean): string {
-    if (state) {
+  textColor(state: string): string {
+    if (state != "") {
       return 'white'
     } else {
       return 'black'
+    }
+  }
+
+  setCursor(state: string): string {
+    if (state != "") {
+      return 'pointer'
+    } else {
+      return 'inherit'
+    }
+  }
+
+  darAlta(idInternado: string, idCama: string) {
+    if (idInternado != '') {
+      const dialogo = this.matDialog.open(DarAltaComponent, { width: '30vw', maxHeight: '98vh', data: { idInternado: idInternado, idCama: idCama }, panelClass: 'info-container-dialog' })
+      dialogo.beforeClosed().subscribe(() => {
+        this.leerAsegurados();
+      });
     }
   }
 

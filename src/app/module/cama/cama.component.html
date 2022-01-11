@@ -1,31 +1,32 @@
 <div class="p-4">
-  <div class="col-12" style="color: #55acee">
-    <h1>ESTADO DE CAMAS</h1>
-  </div>
+  <div class="col-12 h4" style="color: #0e5b93">ESTADO DE CAMAS</div>
   <div class="row mb-4">
     <div class="col-12">
       <h1>Primer piso</h1>
     </div>
-    <div class="col-4" *ngFor="let u of listPiso1">
-      <mat-card>
+    <div class="col-2" *ngFor="let u of listPiso1">
+      <mat-card
+        [ngStyle]="{ cursor: setCursor(u.idInternado) }"
+        (click)="darAlta(u.idInternado, u.id)"
+      >
         <div
           class="col-4 offset-4 text-center"
           [ngStyle]="{
-            'background-color': backgroundColor(u.estado),
-            color: textColor(u.estado)
+            'background-color': backgroundColor(u.idInternado),
+            color: textColor(u.idInternado)
           }"
         >
           {{ u.numero }}
         </div>
         <span
-          *ngIf="!u.estado"
+          *ngIf="u.idInternado == ''"
           class="iconify col-4 offset-4"
           data-icon="twemoji:bed"
           data-width="60"
           data-height="60"
         ></span>
         <span
-          *ngIf="u.estado"
+          *ngIf="u.idInternado != ''"
           class="iconify col-4 offset-4"
           data-icon="twemoji:person-in-bed"
           data-width="60"
@@ -38,26 +39,29 @@
     <div class="col-12">
       <h1>Segundo piso</h1>
     </div>
-    <div class="col-4" *ngFor="let u of listPiso2">
-      <mat-card>
+    <div class="col-2" *ngFor="let u of listPiso2">
+      <mat-card
+        [ngStyle]="{ cursor: setCursor(u.idInternado) }"
+        (click)="darAlta(u.idInternado, u.id)"
+      >
         <div
           class="col-4 offset-4 text-center"
           [ngStyle]="{
-            'background-color': backgroundColor(u.estado),
-            color: textColor(u.estado)
+            'background-color': backgroundColor(u.idInternado),
+            color: textColor(u.idInternado)
           }"
         >
           {{ u.numero }}
         </div>
         <span
-          *ngIf="!u.estado"
+          *ngIf="u.idInternado == ''"
           class="iconify col-4 offset-4"
           data-icon="twemoji:bed"
           data-width="60"
           data-height="60"
         ></span>
         <span
-          *ngIf="u.estado"
+          *ngIf="u.idInternado != ''"
           class="iconify col-4 offset-4"
           data-icon="twemoji:person-in-bed"
           data-width="60"

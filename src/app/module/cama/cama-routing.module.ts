@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CamaComponent } from './cama.component';
+import { DarAltaComponent } from './dar-alta/dar-alta.component';
 
 const routes: Routes = [
   {

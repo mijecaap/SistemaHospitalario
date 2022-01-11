@@ -1,8 +1,11 @@
 .mat-column-nombre {
-    width: 40%;
+    width: 30%;
+}
+.mat-column-apellido {
+    width: 30%;
 }
 .mat-column-dni {
-    width: 40%;
+    width: 20%;
 }
 .mat-column-accion {
     width: 20%;

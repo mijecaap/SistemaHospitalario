@@ -1,12 +1,18 @@
-.mat-column-id{
-    width: 25%
+.mat-column-id {
+  width: 10%;
 }
-.mat-column-dni{
-    width: 25%
+.mat-column-dni {
+  width: 20%;
 }
-.mat-column-enfermedad{
-    width: 25%
+.mat-column-area {
+  width: 20%;
 }
-.mat-column-fecha{
-    width: 25%
+.mat-column-doctor {
+  width: 20%;
+}
+.mat-column-fecha {
+  width: 15%;
+}
+.mat-column-hora {
+  width: 15%;
 }

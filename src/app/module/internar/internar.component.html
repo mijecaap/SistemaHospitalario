@@ -1,109 +1,132 @@
 <div class="p-4">
-  <div class="col-12 text-center" style="color: #55acee">
-    <h1>Internar Paciente</h1>
-  </div>
-  <form
-    class="col-6 offset-3"
-    [formGroup]="internarForm"
-    (ngSubmit)="agregar()"
-    autocomplete="off"
-  >
-    <div class="mb-3">
-      <input
-        type="text"
-        formControlName="dni"
-        class="form-control form-control-lg"
-        placeholder="DNI"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option"
-        >
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-      <span
-        class="text-danger ms-2"
-        *ngIf="
-          internarForm.get('dni')?.hasError('required') &&
-          internarForm.get('dni')?.touched
-        "
-      >
-        El dni <strong>es requerido</strong>
-      </span>
-    </div>
-    <div class="mb-3">
-      <select
-        type="text"
-        formControlName="piso"
-        class="form-control form-control-lg"
-        (change)="onPisoChange($event)"
-      >
-        <option value="">Selecciona un piso</option>
-        <option value="1">Primero</option>
-        <option value="2">Segundo</option>
-      </select>
-      <span
-        class="text-danger ms-2"
-        *ngIf="
-          internarForm.get('piso')?.hasError('required') &&
-          internarForm.get('piso')?.touched
-        "
-      >
-        El piso <strong>es requerido</strong>
-      </span>
-    </div>
-    <div class="mb-3">
-      <select
-        type="text"
-        formControlName="numero"
-        class="form-control form-control-lg"
-      >
-        <option value="0">Selecciona una cama</option>
-        <option *ngFor="let u of listCamaSelected" [value]="u.numero">
-          {{ u.numero }}
-        </option>
-      </select>
-      <span
-        class="text-danger ms-2"
-        *ngIf="
-          internarForm.get('numero')?.hasError('required') &&
-          internarForm.get('numero')?.touched
-        "
-      >
-        El numero <strong>es requerido</strong>
-      </span>
-    </div>
-    <div class="mb-3">
-      <select
-        type="text"
-        formControlName="enfermedad"
-        class="form-control form-control-lg"
-      >
-        <option value="0">Selecciona el tipo de enfermedad</option>
-        <option *ngFor="let u of listEnfermedad" [value]="u.nombre">
-          {{ u.nombre }}
-        </option>
-      </select>
-      <span
-        class="text-danger ms-2"
-        *ngIf="
-          internarForm.get('enfermedad')?.hasError('required') &&
-          internarForm.get('enfermedad')?.touched
-        "
-      >
-        La enfermedad <strong>es requerido</strong>
-      </span>
-    </div>
-    <button
-      type="submit"
-      [disabled]="internarForm.invalid"
-      class="btn btn-primary btn-lg w-100"
-      style="background-color: #114789 !important"
+  <div class="card col-6 offset-3">
+    <form
+      class="card-body"
+      [formGroup]="internarForm"
+      (ngSubmit)="agregar()"
+      autocomplete="off"
     >
-      Agregar
-    </button>
-  </form>
+      <div class="col-12 h4 text-center" style="color: #0e5b93">Internar Asegurado</div>
+      <div class="mb-3">
+        <input
+          type="text"
+          formControlName="dni"
+          class="form-control form-control-lg"
+          maxlength="8"
+          placeholder="DNI del Asegurado"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            internarForm.get('dni')?.hasError('required') &&
+            internarForm.get('dni')?.touched
+          "
+        >
+          El dni <strong>es requerido</strong>
+        </span>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            (internarForm.get('dni')?.hasError('minlength') ||
+              internarForm.get('dni')?.hasError('maxlength')) &&
+            internarForm.get('dni')?.touched
+          "
+        >
+          El dni <strong>es de 8 digitos</strong>
+        </span>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            !(
+              internarForm.get('dni')?.hasError('minlength') ||
+              internarForm.get('dni')?.hasError('maxlength')
+            ) &&
+            internarForm.get('dni')?.hasError('pattern') &&
+            internarForm.get('dni')?.touched
+          "
+        >
+          El dni <strong>solo permite números</strong>
+        </span>
+      </div>
+      <div class="mb-3">
+        <select
+          type="text"
+          formControlName="piso"
+          class="form-control form-control-lg"
+          (change)="onPisoChange($event)"
+        >
+          <option value="">Selecciona un piso</option>
+          <option value="1">Primero</option>
+          <option value="2">Segundo</option>
+        </select>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            internarForm.get('piso')?.hasError('required') &&
+            internarForm.get('piso')?.touched
+          "
+        >
+          El piso <strong>es requerido</strong>
+        </span>
+      </div>
+      <div class="mb-3">
+        <select
+          type="text"
+          formControlName="numero"
+          class="form-control form-control-lg"
+        >
+          <option value="0">Selecciona una cama</option>
+          <option *ngFor="let u of listCamaSelected" [value]="u.numero">
+            {{ u.numero }}
+          </option>
+        </select>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            internarForm.get('numero')?.hasError('required') &&
+            internarForm.get('numero')?.touched
+          "
+        >
+          El numero <strong>es requerido</strong>
+        </span>
+      </div>
+      <div class="mb-3">
+        <select
+          type="text"
+          formControlName="motivo"
+          class="form-control form-control-lg"
+        >
+          <option value="0">Seleccione el motivo</option>
+          <option value="1">Tratamiento médico inmediato</option>
+          <option value="2">Programado</option>
+        </select>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            internarForm.get('enfermedad')?.hasError('required') &&
+            internarForm.get('enfermedad')?.touched
+          "
+        >
+          La enfermedad <strong>es requerido</strong>
+        </span>
+      </div>
+      <button
+        type="submit"
+        [disabled]="internarForm.invalid"
+        class="btn btn-primary btn-lg w-100"
+        style="background-color: #0e5b93 !important"
+      >
+        Agregar
+      </button>
+    </form>
+  </div>
 </div>

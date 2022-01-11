@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-title
+    >{{ asegurado?.nombre }} {{ asegurado?.apellido }}</mat-card-title
+  >
+  <mat-card-subtitle>
+    <div>dni: {{ asegurado?.dni }}</div>
+    <div>
+      motivo:
+      <span *ngIf="internado?.motivo == '1'">Tratamiento medico inmediato</span>
+      <span *ngIf="internado?.motivo == '2'">Programado</span>
+    </div>
+  </mat-card-subtitle>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="darAlta()">Dar de alta</button>
+  </mat-card-actions>
+</mat-card>

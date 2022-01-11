@@ -1,15 +1,15 @@
 .mat-column-id {
-  width: 20%;
+  width: 10%;
 }
 .mat-column-nombre {
-  width: 60%;
-}
-.mat-column-accion {
-  width: 20%;
+  width: 90%;
 }
 .mat-header-cell {
   text-align: center;
 }
 .mat-cell {
   text-align: center;
+}
+.table-hover .mat-row {
+  cursor: pointer;
 }

@@ -2,7 +2,7 @@
   class="toolbar-sidenav-container"
   style="min-height: 100%"
 >
-  <mat-sidenav mode="side" opened [disableClose]="true" style="width: 6%">
+  <mat-sidenav mode="side" opened [disableClose]="true" style="width: 5%">
     <div
       class="d-flex justify-content-center align-items-center"
       style="height: 8%"
@@ -13,8 +13,7 @@
         style="color: #114789; font-size: 30px"
       ></span>
     </div>
-
-    <div style="background-color: #8996ac; min-height: 92%">
+    <div class="sidenav-under">
       <mat-nav-list [disableRipple]="true">
         <a
           mat-list-item
@@ -26,6 +25,7 @@
           <span
             class="iconify"
             data-icon="ant-design:calendar-twotone"
+            color="white"
             data-width="50"
             data-height="50"
           ></span>
@@ -40,6 +40,7 @@
           <span
             class="iconify"
             data-icon="healthicons:inpatient"
+            color="white"
             data-width="50"
             data-height="50"
           ></span>
@@ -54,6 +55,7 @@
           <span
             class="iconify"
             data-icon="bx:bxs-virus"
+            color="white"
             data-width="50"
             data-height="50"
           ></span>
@@ -68,6 +70,7 @@
           <span
             class="iconify"
             data-icon="fluent:patient-32-filled"
+            color="white"
             data-width="50"
             data-height="50"
           ></span>
@@ -82,6 +85,7 @@
           <span
             class="iconify"
             data-icon="healthicons:accident-and-emergency-outline"
+            color="white"
             data-width="50"
             data-height="50"
           ></span>
@@ -96,6 +100,7 @@
           <span
             class="iconify"
             data-icon="healthicons:doctor-male"
+            color="white"
             data-width="50"
             data-height="50"
           ></span>
@@ -103,10 +108,9 @@
       </mat-nav-list>
     </div>
   </mat-sidenav>
-
-  <mat-sidenav-content style="width: 94%">
-    <mat-toolbar style="height: 8vh; background-color: #bbdefb; color: #000">
-      <span style="font-size: 24px">MEDIPLUS</span>
+  <mat-sidenav-content style="width: 95%">
+    <mat-toolbar class="d-flex align-items-center" style="height: 8vh;">
+      <div class="h4 text-white mb-0"><span class="bg-white" style="color: #000046">MEDI</span><b>PLUS</b></div>
       <span class="example-spacer"></span>
       <button
         mat-raised-button

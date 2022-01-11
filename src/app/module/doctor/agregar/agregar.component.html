@@ -1,97 +1,183 @@
 <div class="p-4">
-  <button mat-stroked-button color="primary" routerLink="/paciente">
-    Volver
-  </button>
-  <div class="col-12 mt-4 text-center" style="color: #55acee">
-    <h1>Agregar Doctor</h1>
-  </div>
+  <button mat-stroked-button routerLink="/doctor">Volver</button>
   <div class="row">
-    <form
-      class="col-6 offset-3"
-      [formGroup]="doctorForm"
-      (ngSubmit)="agregar()"
-      autocomplete="off"
-    >
-      <div class="mb-3">
-        <input
-          type="text"
-          formControlName="nombre"
-          class="form-control form-control-lg"
-          placeholder="Nombre"
-        />
-        <span
-          class="text-danger ms-2"
-          *ngIf="
-            doctorForm.get('nombre')?.hasError('required') &&
-            doctorForm.get('nombre')?.touched
-          "
-        >
-          El nombre <strong>es requerido</strong>
-        </span>
-      </div>
-      <div class="mb-3">
-        <input
-          type="text"
-          formControlName="apellido"
-          class="form-control form-control-lg"
-          placeholder="Apellido"
-        />
-        <span
-          class="text-danger ms-2"
-          *ngIf="
-            doctorForm.get('apellido')?.hasError('required') &&
-            doctorForm.get('apellido')?.touched
-          "
-        >
-          El apellido <strong>es requerido</strong>
-        </span>
-      </div>
-      <div class="mb-3">
-        <input
-          type="text"
-          formControlName="dni"
-          class="form-control form-control-lg"
-          placeholder="DNI"
-        />
-        <span
-          class="text-danger ms-2"
-          *ngIf="
-            doctorForm.get('dni')?.hasError('required') &&
-            doctorForm.get('dni')?.touched
-          "
-        >
-          El dni <strong>es requerido</strong>
-        </span>
-      </div>
-      <div class="mb-3">
-        <select
-          type="text"
-          formControlName="especialidad"
-          class="form-control form-control-lg"
-        >
-          <option value="">Selecciona una especialidad</option>
-          <option *ngFor="let u of listEnfermedad" [value]="u.nombre">
-            {{ u.nombre }}
-          </option>
-        </select>
-        <span
-          class="text-danger ms-2"
-          *ngIf="
-            doctorForm.get('especialidad')?.hasError('required') &&
-            doctorForm.get('especialidad')?.touched
-          "
-        >
-          La especialidad <strong>es requerida</strong>
-        </span>
-      </div>
-      <button
-        type="submit"
-        [disabled]="doctorForm.invalid"
-        class="btn btn-primary btn-lg w-100"
-        style="background-color: #114789 !important"
+    <div class="card col-8 offset-2">
+      <form
+        class="row card-body"
+        [formGroup]="doctorForm"
+        (ngSubmit)="agregar()"
+        autocomplete="off"
       >
-        Agregar
-      </button>
-    </form>
+        <div class="col-12 mt-4 h4" style="color: #0e5b93">Agregar Doctor</div>
+        <div class="col-4 d-flex justify-content-center">
+          <img
+            [src]="fn_getPhotoUrl()"
+            style="
+              width: 256px;
+              height: 256px;
+              cursor: pointer;
+              display: block;
+              object-fit: cover;
+            "
+            (click)="cntrl_openPhotoModal()"
+          />
+          <input
+            type="file"
+            class="d-none"
+            accept=".png,.jpg,.jpeg"
+            #inPhoto
+            formControlName="photo"
+            (change)="onFileChange($event)"
+          />
+        </div>
+        <div class="col-8">
+          <div class="mb-3">
+            <input
+              type="text"
+              formControlName="nombre"
+              class="form-control form-control-lg"
+              placeholder="Nombre"
+            />
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                doctorForm.get('nombre')?.hasError('required') &&
+                doctorForm.get('nombre')?.touched
+              "
+            >
+              El nombre <strong>es requerido</strong>
+            </span>
+          </div>
+          <div class="mb-3">
+            <input
+              type="text"
+              formControlName="apellido"
+              class="form-control form-control-lg"
+              placeholder="Apellido"
+            />
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                doctorForm.get('apellido')?.hasError('required') &&
+                doctorForm.get('apellido')?.touched
+              "
+            >
+              El apellido <strong>es requerido</strong>
+            </span>
+          </div>
+          <div class="mb-3">
+            <input
+              type="text"
+              formControlName="dni"
+              class="form-control form-control-lg"
+              maxlength="8"
+              placeholder="DNI"
+            />
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                doctorForm.get('dni')?.hasError('required') &&
+                doctorForm.get('dni')?.touched
+              "
+            >
+              El dni <strong>es requerido</strong>
+            </span>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                (doctorForm.get('dni')?.hasError('minlength') ||
+                  doctorForm.get('dni')?.hasError('maxlength')) &&
+                doctorForm.get('dni')?.touched
+              "
+            >
+              El dni <strong>es de 8 digitos</strong>
+            </span>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                !(
+                  doctorForm.get('dni')?.hasError('minlength') ||
+                  doctorForm.get('dni')?.hasError('maxlength')
+                ) &&
+                doctorForm.get('dni')?.hasError('pattern') &&
+                doctorForm.get('dni')?.touched
+              "
+            >
+              El dni <strong>solo permite números</strong>
+            </span>
+          </div>
+          <div class="mb-3">
+            <input
+              type="text"
+              formControlName="celular"
+              class="form-control form-control-lg"
+              maxlength="9"
+              placeholder="Celular"
+            />
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                doctorForm.get('celular')?.hasError('required') &&
+                doctorForm.get('celular')?.touched
+              "
+            >
+              El numero de celular <strong>es requerido</strong>
+            </span>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                (doctorForm.get('celular')?.hasError('minlength') ||
+                  doctorForm.get('celular')?.hasError('maxlength')) &&
+                doctorForm.get('celular')?.touched
+              "
+            >
+              El numero de celular <strong>es de 9 digitos</strong>
+            </span>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                !(
+                  doctorForm.get('celular')?.hasError('minlength') ||
+                  doctorForm.get('celular')?.hasError('maxlength')
+                ) &&
+                doctorForm.get('celular')?.hasError('pattern') &&
+                doctorForm.get('celular')?.touched
+              "
+            >
+              El numero de celular <strong>solo permite números</strong>
+            </span>
+          </div>
+          <div class="mb-3">
+            <select
+              type="text"
+              formControlName="especialidad"
+              class="form-control form-control-lg"
+            >
+              <option value="">Selecciona una especialidad</option>
+              <option *ngFor="let u of listEnfermedad" [value]="u.nombre">
+                {{ u.nombre }}
+              </option>
+            </select>
+            <span
+              class="text-danger ms-2"
+              *ngIf="
+                doctorForm.get('especialidad')?.hasError('required') &&
+                doctorForm.get('especialidad')?.touched
+              "
+            >
+              La especialidad <strong>es requerida</strong>
+            </span>
+          </div>
+          <button
+            type="submit"
+            [disabled]="doctorForm.invalid"
+            class="btn btn-primary btn-lg w-100 mb-2"
+            style="background-color: #0e5b93 !important"
+          >
+            Agregar
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

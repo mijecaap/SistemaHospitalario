@@ -1,95 +1,181 @@
 <div class="p-4">
-  <button mat-stroked-button color="primary" routerLink="/visita">
-    Volver
-  </button>
-  <div class="col-12 mt-4 text-center" style="color: #55acee">
-    <h1>Agendar visita</h1>
-  </div>
-  <form
-    class="col-6 offset-3"
-    [formGroup]="visitaForm"
-    (ngSubmit)="agregar()"
-    autocomplete="off"
-  >
-    <div class="mb-3">
-      <input
-        type="text"
-        formControlName="dni"
-        class="form-control form-control-lg"
-        placeholder="DNI"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option"
+  <button mat-stroked-button routerLink="/visita">Volver</button>
+  <div class="col-6 offset-3 card p-4">
+    <div class="h4 text-center">Agendar visita</div>
+    <form [formGroup]="visitaForm" (ngSubmit)="agregar()" autocomplete="off">
+      <div class="mb-3">
+        <input
+          type="text"
+          formControlName="dni"
+          class="form-control form-control-lg"
+          maxlength="8"
+          placeholder="DNI del Asegurado"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            visitaForm.get('dni')?.hasError('required') &&
+            visitaForm.get('dni')?.touched
+          "
         >
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-      <span
-        class="text-danger ms-2"
-        *ngIf="
-          visitaForm.get('dni')?.hasError('required') &&
-          visitaForm.get('dni')?.touched
+          El dni <strong>es requerido</strong>
+        </span>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            (visitaForm.get('dni')?.hasError('minlength') ||
+              visitaForm.get('dni')?.hasError('maxlength')) &&
+            visitaForm.get('dni')?.touched
+          "
+        >
+          El dni <strong>es de 8 digitos</strong>
+        </span>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            !(
+              visitaForm.get('dni')?.hasError('minlength') ||
+              visitaForm.get('dni')?.hasError('maxlength')
+            ) &&
+            visitaForm.get('dni')?.hasError('pattern') &&
+            visitaForm.get('dni')?.touched
+          "
+        >
+          El dni <strong>solo permite números</strong>
+        </span>
+      </div>
+      <button
+        *ngIf="!siguientePaso"
+        type="button"
+        [disabled]="
+          visitaForm.get('dni')?.hasError('minlength') ||
+          visitaForm.get('dni')?.hasError('pattern') ||
+          visitaForm.get('dni')?.hasError('required')
         "
+        (click)="verificarDni()"
+        class="btn btn-primary btn-lg w-100"
+        style="background-color: #114789 !important"
       >
-        El dni <strong>es requerido</strong>
-      </span>
-    </div>
-    <div class="mb-3">
-      <select
-        type="text"
-        formControlName="enfermedad"
-        class="form-control form-control-lg"
+        Verificar
+      </button>
+      <div *ngIf="siguientePaso" class="mb-3">
+        <select
+          type="text"
+          formControlName="enfermedad"
+          class="form-control form-control-lg"
+          (change)="leerDoctores($event)"
+        >
+          <option value="">Selecciona el área a asignar</option>
+          <option *ngFor="let u of listEspecialidad" [value]="u.nombre">
+            {{ u.nombre }}
+          </option>
+        </select>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            visitaForm.get('enfermedad')?.hasError('required') &&
+            visitaForm.get('enfermedad')?.touched
+          "
+        >
+          La enfermedad <strong>es requerido</strong>
+        </span>
+      </div>
+      <div *ngIf="siguientePaso" class="mb-3">
+        <select
+          type="text"
+          formControlName="doctor"
+          class="form-control form-control-lg"
+        >
+          <option value="">Selecciona el Doctor a asignar</option>
+          <option *ngFor="let u of listDoctor" [value]="u.dni">
+            {{ u.nombre }} {{ u.apellido }}
+          </option>
+        </select>
+        <span
+          class="text-danger ms-2"
+          *ngIf="
+            visitaForm.get('enfermedad')?.hasError('required') &&
+            visitaForm.get('enfermedad')?.touched
+          "
+        >
+          La enfermedad <strong>es requerido</strong>
+        </span>
+      </div>
+      <div *ngIf="siguientePaso" class="mb-3 row m-0">
+        <div class="col-6 row m-0">
+          <input
+            type="text"
+            formControlName="fecha"
+            class="form-control form-control-lg"
+            style="width: 85% !important"
+            mat-input
+            placeholder="mm/dd/yyyy"
+            [matDatepicker]="datepicker"
+          />
+          <mat-datepicker-toggle
+            style="width: 15% !important"
+            matSuffix
+            [for]="datepicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #datepicker> </mat-datepicker>
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              visitaForm.get('fecha')?.hasError('required') &&
+              visitaForm.get('fecha')?.touched
+            "
+          >
+            La fecha <strong>es requerida</strong>
+          </span>
+        </div>
+        <div class="col-6">
+          <input
+            type="number"
+            formControlName="hora"
+            class="form-control form-control-lg"
+            placeholder="Hora 8-16 (Format 24h)"
+            min="8"
+            max="16"
+          />
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              visitaForm.get('hora')?.hasError('hora') &&
+              visitaForm.get('hora')?.touched
+            "
+          >
+            La hora <strong>es requerida</strong>
+          </span>
+          <span
+            class="text-danger ms-2"
+            *ngIf="
+              (visitaForm.get('hora')?.hasError('min') ||
+                visitaForm.get('hora')?.hasError('max')) &&
+              visitaForm.get('hora')?.touched
+            "
+          >
+            La hora de visita <strong>es de 8 a 16</strong>
+          </span>
+        </div>
+      </div>
+      <button
+        *ngIf="siguientePaso"
+        type="submit"
+        [disabled]="visitaForm.invalid"
+        class="btn btn-primary btn-lg w-100"
+        style="background-color: #114789 !important"
       >
-        <option value="">Selecciona el tipo de enfermedad</option>
-        <option *ngFor="let u of listEnfermedad" [value]="u.nombre">
-          {{ u.nombre }}
-        </option>
-      </select>
-      <span
-        class="text-danger ms-2"
-        *ngIf="
-          visitaForm.get('enfermedad')?.hasError('required') &&
-          visitaForm.get('enfermedad')?.touched
-        "
-      >
-        La enfermedad <strong>es requerido</strong>
-      </span>
-    </div>
-    <div class="mb-3 row m-0">
-      <input
-        type="text"
-        formControlName="fecha"
-        class="form-control form-control-lg"
-        style="width: 90% !important"
-        mat-input
-        [matDatepicker]="datepicker"
-      />
-      <mat-datepicker-toggle
-        style="width: 10% !important"
-        matSuffix
-        [for]="datepicker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #datepicker> </mat-datepicker>
-      <span
-        class="text-danger ms-2"
-        *ngIf="
-          visitaForm.get('fecha')?.hasError('required') &&
-          visitaForm.get('fecha')?.touched
-        "
-      >
-        La fecha <strong>es requerida</strong>
-      </span>
-    </div>
-    <button
-      type="submit"
-      [disabled]="visitaForm.invalid"
-      class="btn btn-primary btn-lg w-100"
-      style="background-color: #114789 !important"
-    >
-      Agregar
-    </button>
-  </form>
+        Agregar
+      </button>
+    </form>
+  </div>
 </div>

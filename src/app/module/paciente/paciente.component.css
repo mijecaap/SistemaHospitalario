@@ -3,19 +3,22 @@ td button {
 }
 
 .mat-column-id {
-  width: 8%;
+  width: 9%;
 }
 .mat-column-nombre {
-  width: 23%;
+  width: 19%;
 }
 .mat-column-apellido {
-  width: 23%;
+  width: 19%;
 }
 .mat-column-dni {
-  width: 23%;
+  width: 17%;
+}
+.mat-column-familiares {
+  width: 17%;
 }
 .mat-column-accion {
-  width: 23%;
+  width: 19%;
 }
 .mat-header-cell {
   text-align: center;
