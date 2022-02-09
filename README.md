@@ -1,3 +1,8 @@
+Link: https://sistemahospitalario-17888.web.app
+CREDENCIALES
+email: mijecaap@hotmail.com
+contraseña: 123123
+
 # MediPlus
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
